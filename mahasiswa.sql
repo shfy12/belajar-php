@@ -1,10 +1,10 @@
 CREATE DATABASE fakultas;
--- cara ngeliat informasi table --
-desc mahasiswa;
-desc jurusan;
--- cara ngeliat data ditable --
-select * from mahasiswa;
-select * from jurusan;
+    -- cara ngeliat informasi table --
+    desc mahasiswa;
+    desc jurusan;
+    -- cara ngeliat data ditable --
+    select * from mahasiswa;
+    select * from jurusan;
 
 CREATE TABLE jurusan (
     id INTEGER PRIMARY KEY AUTO_INCREMENT,
