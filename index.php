@@ -1,6 +1,6 @@
 <?php
 //1. buat koneksi dengan MySQL
-$con = mysqli_connect("localhost","root","","seal_fakultas")
+$con = mysqli_connect("localhost","root","","fakultas");
 
 //2. cek koneksi dengan MySQL
 if (mysqli_connect_errno()) {
@@ -14,22 +14,33 @@ if (mysqli_connect_errno()) {
 $query = "SELECT * FROM mahasiswa";
 
 //4. menampilkan data dengan sql query
-$result = mysqli_query($con,$query)
-if($result){
+$result = mysqli_query($con,$query);
+// membuat persiapan data mahasiswa dengan variabel kosong ([]) karena diisi oleh variabel while
+$mahasiswa = [];
+if ($result) {
     //menampilkan data satu per satu
     /*
     $row = mysqli_fetch_assoc($result);
     var_dump($row);
+    //menampilkan nama aja (bisa diganti juga selain nama seperti alamat, dll)
     echo $row ["nama"]
     */
     while($row=mysqli_fetch_assoc($result)){
-        echo "<br>". $row["nama"]."alamat : ".$row["alamat"];
+        //echo "<br>".$row["nama"].
+        //" alamat : ".$row["alamat"]; (nambahin selain nama aja)
+        $mahasiswa[] = $row;
     }
     mysqli_free_result($result);
 }
 
 //5.tutup koneksi mysql
 mysqli_close($con);
+
+/* kalau foreeach diphp kayak begini
+foreach($mahasiswa as $value){
+    echo $value["nama"];
+}
+*/
 ?>
 
 <!DOCTYPE html>
@@ -47,10 +58,15 @@ mysqli_close($con);
             <th>NIM</th>
             <th>Nama</th>
         </tr>
+        <!-- foreeach biasanya diakhir ditambahkan {} diakhir tetapi bisa juga hanya : -->
+        <?php foreach($mahasiswa as $value): ?>
         <tr>
-            <td>21112022</td>
-            <td>Melati</td>
+            <!-- menampilkan data yang ada di mySQL -->
+            <td><?php echo $value["nim"]; ?></td>
+            <td><?php echo $value["nama"]; ?></td>
         </tr>
+        <!-- penambahan endforeach juga harus dilakukan untuk mengakhiri -->
+        <?php endforeach; ?>
     </table>
 </body>
 </html>
