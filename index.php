@@ -53,10 +53,13 @@ foreach($mahasiswa as $value){
 </head>
 <body>
     <h1>Data Mahasiswa</h1>
+    <a href="insert.php">Tambah Data</a>
     <table border="1" style="width:100%;">
         <tr>
             <th>NIM</th>
             <th>Nama</th>
+            <th>Tempat Lahir</th>
+            <th>Action</th>
         </tr>
         <!-- foreeach biasanya diakhir ditambahkan {} diakhir tetapi bisa juga hanya : -->
         <?php foreach($mahasiswa as $value): ?>
@@ -64,6 +67,13 @@ foreach($mahasiswa as $value){
             <!-- menampilkan data yang ada di mySQL -->
             <td><?php echo $value["nim"]; ?></td>
             <td><?php echo $value["nama"]; ?></td>
+            <td><?php echo $value["tempat_lahir"]; ?></td>
+            <td>
+                <!-- "update.php?id=".$value["nama"]; ?>" ditulis seperti ini 
+                karena update dan value sama2 string jadi harus ada (.) buat mengabungkannya -->
+                <a href="<?php echo "update.php?id=".$value["id"]; ?>">Edit</a>  
+                <a href="<?php echo "delete.php?id=".$value["id"]; ?>">| Delete</a>
+            </td>
         </tr>
         <!-- penambahan endforeach juga harus dilakukan untuk mengakhiri -->
         <?php endforeach; ?>
